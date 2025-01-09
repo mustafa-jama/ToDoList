@@ -1,7 +1,7 @@
 export function Tabs(props) {
   const tabs = ['All', 'Open', 'Completed'];
 
-  const { todos } = props;
+  const { todos, selectedTab ,setSelectedTab } = props;
 
   return (
     <nav className='tab-container'>
@@ -10,6 +10,7 @@ export function Tabs(props) {
           tab === 'All'
             ? todos.length
             : tab === 'Open'
+
             ? todos.filter((todo) =>
                 !todo.completed
               ).length
@@ -19,13 +20,17 @@ export function Tabs(props) {
               ).length
 
         return (
-          <button className='tab-button' key={tabIndex}>
+          <button onClick={() => setSelectedTab(tab)}className={`tab-button ${tab === selectedTab ? 'tab-selected': " "}`} key={tabIndex}>
             <h4>
               {tab} <span> ({numOfTasks})</span>
             </h4>
           </button>
         );
+
       })}
+
+      <hr/>
     </nav>
+
   );
 }
